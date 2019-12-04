@@ -1,6 +1,6 @@
 # rpg-csharp-practice
 
-RPG created as part of Scott Lilly's tutorial.
+RPG created as part of Scott Lilly's tutorial. The tutorial can be found at: https://scottlilly.com/build-a-cwpf-rpg/
 
 ## Goal
 
