@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgTutorial", "RpgTutorial\RpgTutorial.csproj", "{E1509680-E032-4D58-993E-B47AA5BD03D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{8745AE79-3D44-4BFD-9F39-EBE0E8183107}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{99A03F9C-C01D-4E62-81FB-F36C78E51889}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E1509680-E032-4D58-993E-B47AA5BD03D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1509680-E032-4D58-993E-B47AA5BD03D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1509680-E032-4D58-993E-B47AA5BD03D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8745AE79-3D44-4BFD-9F39-EBE0E8183107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8745AE79-3D44-4BFD-9F39-EBE0E8183107}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8745AE79-3D44-4BFD-9F39-EBE0E8183107}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8745AE79-3D44-4BFD-9F39-EBE0E8183107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
