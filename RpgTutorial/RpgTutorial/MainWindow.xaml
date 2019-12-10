@@ -78,8 +78,7 @@
                                HorizontalAlignment="Center" 
                                Text="{Binding CurrentLocation.Name}"/>
 
-                    <!--/Engine;component/Images/Locations/Home.png-->
-                    <!--{Binding CurrentLocation.ImageName}"-->
+
                     <Image Grid.Row="1"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
@@ -89,6 +88,7 @@
 
                     <TextBlock Grid.Row="2"
                                HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
                                Text="{Binding CurrentLocation.Description}"/>
                 </Grid>
 
