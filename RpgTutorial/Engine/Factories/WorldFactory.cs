@@ -76,6 +76,9 @@ namespace Engine.Factories
                 "A moldy ramshackle hut, before which an evil looking scarecrow spins in the wind.",
                 "/Engine;component/Images/Locations/HerbalistsHut.png"
             );
+
+            newWorld.LocationAt(0,1).QuestsAvailableHere.Add(QuestFactory.GetQuestById(1));
+
             newWorld.AddLocation(
                 0,
                 2,
