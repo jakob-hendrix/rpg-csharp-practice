@@ -11,7 +11,6 @@ namespace Engine.Factories
     {
         private static List<GameItem> _standardGameItems;
 
-
         // Populate our list of game items
         static ItemFactory()
         {
@@ -23,6 +22,10 @@ namespace Engine.Factories
                 new Weapon(1002, "Rusty Sword", 5, 1, 6));
             _standardGameItems.Add(
                 new Weapon(1003, "Broadsword", 20, 1, 8));
+            _standardGameItems.Add(
+                new GameItem(9001, "Snake Fang", 1));
+            _standardGameItems.Add(
+                new GameItem(9002, "Snakeskin", 2));
         }
 
         public static GameItem CreateGameItem(int itemTypeId)
