@@ -6,7 +6,7 @@ using Engine.Models;
 
 namespace Engine.ViewModels
 {
-    public class GameSession : INotifyPropertyChanged
+    public class GameSession : BaseNotificationClass
     {
         private Location _currentLocation;
         public Player CurrentPlayer { get; set; }
@@ -71,14 +71,6 @@ namespace Engine.ViewModels
             CurrentLocation = CurrentWorld.LocationAt(
                 CurrentLocation.XCoordinate,
                 CurrentLocation.YCoordinate - 1);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
