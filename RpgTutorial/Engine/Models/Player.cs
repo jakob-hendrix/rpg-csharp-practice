@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Engine.Models
 {
@@ -69,6 +70,13 @@ namespace Engine.Models
                 _gold = value;
                 OnPropertyChanged(nameof(Gold));
             }
+        }
+
+        public ObservableCollection<GameItem> Inventory { get; set; }
+
+        public Player()
+        {
+            Inventory = new ObservableCollection<GameItem>();
         }
     }
 }
