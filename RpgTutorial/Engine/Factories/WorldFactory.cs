@@ -8,10 +8,10 @@ using Engine.Models;
 
 namespace Engine.Factories
 {
-    internal class WorldFactory
+    internal static class WorldFactory
     {
         // Internal classes may only be used inside the same project. Only GameSession should be using me
-        internal World CreateWorld()
+        internal static World CreateWorld()
         {
             World newWorld = new World();
 
