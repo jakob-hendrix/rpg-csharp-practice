@@ -39,6 +39,8 @@ namespace Engine.Factories
                 "/Engine;component/Images/Locations/FarmFields.png"
             );
 
+            newWorld.LocationAt(-2,-1).AddMonster(2,100);
+
             newWorld.AddLocation(
                 -1,
                 0,
@@ -69,6 +71,9 @@ namespace Engine.Factories
                 "What light is not blocked by the tree canopy is captured by the thick layers of gossamer web.",
                 "/Engine;component/Images/Locations/SpiderForest.png"
             );
+
+            newWorld.LocationAt(2, 0).AddMonster(3, 100);
+
             newWorld.AddLocation(
                 0,
                 1,
@@ -86,6 +91,8 @@ namespace Engine.Factories
                 "Many strange flowers grow wild here. You hear the hissing of angry snakes.",
                 "/Engine;component/Images/Locations/HerbalistsGarden.png"
             );
+
+            newWorld.LocationAt(0, 2).AddMonster(1, 100);
 
             return newWorld;
         }
