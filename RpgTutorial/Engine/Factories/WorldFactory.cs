@@ -20,7 +20,7 @@ namespace Engine.Factories
                 -1,
                 "Home",
                 "Before you is a ramshackle hut with mold growing along the walls from the steady misting rain.",
-                "/Engine;component/Images/Locations/Home.png"
+                "Home.png"
             );
 
             newWorld.AddLocation(
@@ -28,7 +28,7 @@ namespace Engine.Factories
                 -1,
                 "Farmer's House",
                 "This is the farmer's hut.'",
-                "/Engine;component/Images/Locations/FarmHouse.png"
+                "FarmHouse.png"
             );
 
             newWorld.AddLocation(
@@ -36,7 +36,7 @@ namespace Engine.Factories
                 -1,
                 "Farmer's Field",
                 "Rows of corn stretch as far as the eye can see. The wind howls, and from the stalks the sound of crunching emanates.",
-                "/Engine;component/Images/Locations/FarmFields.png"
+                "FarmFields.png"
             );
 
             newWorld.LocationAt(-2,-1).AddMonster(2,100);
@@ -46,7 +46,7 @@ namespace Engine.Factories
                 0,
                 "Trading Shop",
                 "Ye ole shoppe",
-                "/Engine;component/Images/Locations/Trader.png"
+                "Trader.png"
             );
 
             newWorld.AddLocation(
@@ -54,14 +54,14 @@ namespace Engine.Factories
                 0,
                 "Town Square",
                 "This is where the town gallows stand.",
-                "/Engine;component/Images/Locations/TownSquare.png"
+                "TownSquare.png"
             );
             newWorld.AddLocation(
                 1,
                 0,
                 "Town Gate",
                 "The gate dangles from the walls by a single rusty hinge.",
-                "/Engine;component/Images/Locations/TownGate.png"
+                "TownGate.png"
             );
 
             newWorld.AddLocation(
@@ -69,7 +69,7 @@ namespace Engine.Factories
                 0,
                 "Spider Forest",
                 "What light is not blocked by the tree canopy is captured by the thick layers of gossamer web.",
-                "/Engine;component/Images/Locations/SpiderForest.png"
+                "SpiderForest.png"
             );
 
             newWorld.LocationAt(2, 0).AddMonster(3, 100);
@@ -79,7 +79,7 @@ namespace Engine.Factories
                 1,
                 "Herbalist's Hut",
                 "A moldy ramshackle hut, before which an evil looking scarecrow spins in the wind.",
-                "/Engine;component/Images/Locations/HerbalistsHut.png"
+                "HerbalistsHut.png"
             );
 
             newWorld.LocationAt(0,1).QuestsAvailableHere.Add(QuestFactory.GetQuestById(1));
@@ -89,7 +89,7 @@ namespace Engine.Factories
                 2,
                 "Herbalist's Garden",
                 "Many strange flowers grow wild here. You hear the hissing of angry snakes.",
-                "/Engine;component/Images/Locations/HerbalistsGarden.png"
+                "HerbalistsGarden.png"
             );
 
             newWorld.LocationAt(0, 2).AddMonster(1, 100);

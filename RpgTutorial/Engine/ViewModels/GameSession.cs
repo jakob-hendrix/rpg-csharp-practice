@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Engine.Annotations;
 using Engine.EventArgs;
 using Engine.Factories;
@@ -33,7 +34,11 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToWest));
                 OnPropertyChanged(nameof(HasLocationToSouth));
 
+                RaiseMessage("");
+                RaiseMessage($"You have entered {CurrentLocation.Name}.");
+
                 GivePlayerQuestsAtLocation();
+                CompleteQuestAtLocation();
                 GetMonsterAtLocation();
             }
         }
@@ -115,6 +120,51 @@ namespace Engine.ViewModels
                 CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1); 
             }
         }
+
+        private void CompleteQuestAtLocation()
+        {
+            foreach (Quest quest in CurrentLocation.QuestsAvailableHere)
+            {
+                QuestStatus questToComplete =
+                    CurrentPlayer.Quests.FirstOrDefault(q => q.PlayerQuest.Id == quest.Id && !q.IsCompleted);
+
+                if (questToComplete != null)
+                {
+                    if (CurrentPlayer.HasAllTheseItems(quest.ItemsToComplete))
+                    {
+                        foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                        {
+                            for (int i = 0; i < itemQuantity.Quantity; i++)
+                            {
+                                CurrentPlayer.RemoveItemsFromInventory(
+                                    CurrentPlayer.Inventory.FirstOrDefault(item => item.ItemTypeId == itemQuantity.ItemId));
+                            }
+                        }
+
+                        RaiseMessage("");
+                        RaiseMessage($"You completed the quest {quest.Name}!");
+
+                        // give the player the quest rewards
+                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
+                        RaiseMessage($"You gained {quest.RewardExperiencePoints} XP...");
+
+                        CurrentPlayer.Gold += quest.RewardGold;
+                        RaiseMessage($"You received {quest.RewardGold} gold pieces...");
+
+                        foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                        {
+                            GameItem rewardItem = ItemFactory.CreateGameItem(itemQuantity.ItemId);
+
+                            CurrentPlayer.AddItemToInventory(rewardItem);
+                            RaiseMessage($"You receive a {rewardItem.Name}");
+                        }
+
+                        questToComplete.IsCompleted = true;
+                    }
+                }
+            }
+        }
+
         private void GivePlayerQuestsAtLocation()
         {
             foreach (Quest quest in CurrentLocation.QuestsAvailableHere)
@@ -122,6 +172,23 @@ namespace Engine.ViewModels
                 if (CurrentPlayer.Quests.All(q => q.PlayerQuest.Id != quest.Id))
                 {
                     CurrentPlayer.Quests.Add(new QuestStatus(quest));
+
+                    RaiseMessage("");
+                    RaiseMessage($"You started the quest {quest.Name}");
+                    RaiseMessage(quest.Description);
+
+                    RaiseMessage($"Return with: ");
+                    foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                    {
+                        RaiseMessage($"\t{itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemId).Name}");
+                    }
+                    RaiseMessage($"And you will receive: ");
+                    RaiseMessage($"\t{quest.RewardExperiencePoints} XP");
+                    RaiseMessage($"\t{quest.RewardGold} gold");
+                    foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                    {
+                        RaiseMessage($"\t{itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemId).Name}");
+                    }
                 }
             }
         }
