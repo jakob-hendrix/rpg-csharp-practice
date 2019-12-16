@@ -31,6 +31,8 @@ namespace Engine.Factories
                 "FarmHouse.png"
             );
 
+            newWorld.LocationAt(-1, -1).TraderHere = TraderFactory.GetTraderByName("Farmer Ted");
+
             newWorld.AddLocation(
                 -2,
                 -1,
@@ -48,6 +50,8 @@ namespace Engine.Factories
                 "Ye ole shoppe",
                 "Trader.png"
             );
+
+            newWorld.LocationAt(-1, 0).TraderHere = TraderFactory.GetTraderByName("Susan");
 
             newWorld.AddLocation(
                 0,
@@ -81,6 +85,8 @@ namespace Engine.Factories
                 "A moldy ramshackle hut, before which an evil looking scarecrow spins in the wind.",
                 "HerbalistsHut.png"
             );
+
+            newWorld.LocationAt(0, 1).TraderHere = TraderFactory.GetTraderByName("Pete the Herbalist");
 
             newWorld.LocationAt(0,1).QuestsAvailableHere.Add(QuestFactory.GetQuestById(1));
 

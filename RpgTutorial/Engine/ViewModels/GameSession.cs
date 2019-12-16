@@ -18,6 +18,7 @@ namespace Engine.ViewModels
 
         private Location _currentLocation;
         private Monster _currentMonster;
+        private Trader _currentTrader;
 
         public Player CurrentPlayer { get; set; }
         public World CurrentWorld { get; set; }
@@ -28,6 +29,9 @@ namespace Engine.ViewModels
             set
             {
                 _currentLocation = value;
+
+                CurrentTrader = CurrentLocation.TraderHere;
+
                 OnPropertyChanged(nameof(CurrentLocation));
                 OnPropertyChanged(nameof(HasLocationToNorth));
                 OnPropertyChanged(nameof(HasLocationToEast));
@@ -40,6 +44,17 @@ namespace Engine.ViewModels
                 GivePlayerQuestsAtLocation();
                 CompleteQuestAtLocation();
                 GetMonsterAtLocation();
+            }
+        }
+
+        public Trader CurrentTrader
+        {
+            get => _currentTrader;
+            set
+            {
+                _currentTrader = value;
+                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(nameof(HasTrader));
             }
         }
 
@@ -68,6 +83,7 @@ namespace Engine.ViewModels
         public bool HasLocationToWest => CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
         public bool HasLocationToSouth => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
         public bool HasMonster => CurrentMonster != null;
+        public bool HasTrader => CurrentTrader != null;
         
         #endregion
         
