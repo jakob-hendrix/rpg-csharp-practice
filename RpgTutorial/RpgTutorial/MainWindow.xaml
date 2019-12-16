@@ -203,6 +203,7 @@
                 <ColumnDefinition Width="255"/>
             </Grid.ColumnDefinitions>
 
+            <!-- Movement Controls -->
             <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
