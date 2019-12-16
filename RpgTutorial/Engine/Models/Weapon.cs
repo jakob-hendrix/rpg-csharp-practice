@@ -8,16 +8,21 @@ namespace Engine.Models
 {
     public class Weapon : GameItem
     {
-        public int DamageDieCount { get; set; }
-        public int DamageDieSides { get; set; }
+        public int MinDamage { get; }
 
-        public Weapon(int itemTypeID, string name, int price, int damageDieCount, int damageDieSides)
-            : base(itemTypeID, name, price)
+        public int MaxDamage { get; }
+
+        // implement if you want to use dice based damage
+        //public int DamageDieCount { get; set; }
+        //public int DamageDieSides { get; set; }
+
+        public Weapon(int itemTypeId, string name, int price, int minDamage, int maxDamage)
+            : base(itemTypeId, name, price)
         {
-            DamageDieCount = damageDieCount;
-            DamageDieSides = damageDieSides;
+            MinDamage = minDamage;
+            MaxDamage = maxDamage;
         }
 
-        public Weapon Clone() => new Weapon(ItemTypeId, Name, Price, DamageDieCount, DamageDieSides);
+        public Weapon Clone() => new Weapon(ItemTypeId, Name, Price, MinDamage, MaxDamage);
     }
 }

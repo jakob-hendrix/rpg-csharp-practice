@@ -18,7 +18,7 @@ namespace Engine.Models
         public int HitPoints
         {
             get => _hitPoints;
-            private set
+            set
             {
                 _hitPoints = value;
                 OnPropertyChanged(nameof(HitPoints));
