@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgTutorial", "RpgTutorial\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{99A03F9C-C01D-4E62-81FB-F36C78E51889}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEngine", "TestEngine\TestEngine.csproj", "{A2D160DA-20A5-4194-93CC-21DEF4F61394}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99A03F9C-C01D-4E62-81FB-F36C78E51889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D160DA-20A5-4194-93CC-21DEF4F61394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D160DA-20A5-4194-93CC-21DEF4F61394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D160DA-20A5-4194-93CC-21DEF4F61394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D160DA-20A5-4194-93CC-21DEF4F61394}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
