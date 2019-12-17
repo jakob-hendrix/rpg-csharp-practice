@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Engine.Models
+﻿namespace Engine.Models
 {
     public class Weapon : GameItem
     {
@@ -23,6 +17,6 @@ namespace Engine.Models
             MaxDamage = maxDamage;
         }
 
-        public Weapon Clone() => new Weapon(ItemTypeId, Name, Price, MinDamage, MaxDamage);
+        public new Weapon Clone() => new Weapon(ItemTypeId, Name, Price, MinDamage, MaxDamage);
     }
 }
