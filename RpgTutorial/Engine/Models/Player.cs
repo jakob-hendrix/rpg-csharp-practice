@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -6,14 +7,11 @@ namespace Engine.Models
 {
     public class Player : LivingEntity
     {
-
-
         #region Properties
 
         private string _characterClass;
         private string _class;
         private int _experiencePoints;
-        private int _level;
 
         public string Class
         {
@@ -28,20 +26,12 @@ namespace Engine.Models
         public int ExperiencePoints
         {
             get => _experiencePoints;
-            set
+            private set
             {
                 _experiencePoints = value;
                 OnPropertyChanged(nameof(ExperiencePoints));
-            }
-        }
 
-        public int Level
-        {
-            get => _level;
-            set
-            {
-                _level = value;
-                OnPropertyChanged(nameof(Level));
+                SetLevelAndMaximumHitPoints();
             }
         }
 
@@ -49,12 +39,32 @@ namespace Engine.Models
 
         #endregion
 
+        public event EventHandler OnLeveledUp; 
+
         public Player(string name, string characterClass, int experiencePoints, int maxHitPoints, int currentHitPoints,
             int gold) : base(name, maxHitPoints, currentHitPoints, gold)
         {
             _characterClass = characterClass;
             _experiencePoints = experiencePoints;
             Quests = new ObservableCollection<QuestStatus>();
+        }
+
+        public void AddExperience(int gainedXp)
+        {
+            ExperiencePoints += gainedXp;
+        }
+
+        private void SetLevelAndMaximumHitPoints()
+        {
+            int originalLevel = Level;
+
+            Level = (ExperiencePoints / 100) + 1;
+
+            if (Level != originalLevel)
+            {
+                MaximumHitPoints = Level * 10;
+                OnLeveledUp?.Invoke(this, System.EventArgs.Empty);
+            }
         }
 
         public bool HasAllTheseItems(List<ItemQuantity> items)

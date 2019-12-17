@@ -14,6 +14,7 @@ namespace Engine.Models
         private int _currentHitPoints;
         private int _maximumHitPoints;
         private int _gold;
+        private int _level;
 
         public string Name
         {
@@ -38,17 +39,27 @@ namespace Engine.Models
         public int MaximumHitPoints
         {
             get => _maximumHitPoints;
-            private set
+            protected set
             {
                 _maximumHitPoints = value;
                 OnPropertyChanged(nameof(MaximumHitPoints));
             }
         }
 
+        public int Level
+        {
+            get => _level;
+            protected set
+            {
+                _level = value;
+                OnPropertyChanged(nameof(Level));
+            }
+        }
+
         public int Gold
         {
             get => _gold;
-            private set
+            protected set
             {
                 _gold = value;
                 OnPropertyChanged(nameof(Gold));
@@ -64,18 +75,19 @@ namespace Engine.Models
 
         public event EventHandler OnKilled;
 
-        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold)
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold, int level = 1)
         {
             _name = name;
             _maximumHitPoints = maximumHitPoints;
             _currentHitPoints = currentHitPoints;
             _gold = gold;
+            _level = level;
 
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
         }
 
-        public  void TakeDamage(int damageAmount)
+        public void TakeDamage(int damageAmount)
         {
             CurrentHitPoints -= damageAmount;
             if (IsDead)
@@ -155,6 +167,7 @@ namespace Engine.Models
 
             OnPropertyChanged(nameof(Weapons));
         }
+
         private void RaiseOnKilledEvent() => OnKilled?.Invoke(this, new System.EventArgs());
     }
 }
