@@ -17,7 +17,8 @@ namespace Engine.ViewModels
         private Trader _currentTrader;
         private Player _currentPlayer;
 
-        public World CurrentWorld { get; set; }
+        public World CurrentWorld { get; }
+
         public Player CurrentPlayer
         {
             get => _currentPlayer;
@@ -46,7 +47,7 @@ namespace Engine.ViewModels
             {
                 _currentLocation = value;
 
-                OnPropertyChanged(nameof(CurrentLocation));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasLocationToNorth));
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToWest));
@@ -63,17 +64,6 @@ namespace Engine.ViewModels
             }
         }
 
-        public Trader CurrentTrader
-        {
-            get => _currentTrader;
-            set
-            {
-                _currentTrader = value;
-                OnPropertyChanged(nameof(CurrentTrader));
-                OnPropertyChanged(nameof(HasTrader));
-            }
-        }
-
         public Monster CurrentMonster
         {
             get => _currentMonster;
@@ -83,6 +73,7 @@ namespace Engine.ViewModels
                 {
                     _currentMonster.OnKilled -= OnCurrentMonsterKilled;
                 }
+
                 _currentMonster = value;
 
                 if (CurrentMonster != null)
@@ -93,8 +84,19 @@ namespace Engine.ViewModels
                     RaiseMessage($"You see a {CurrentMonster.Name} here!");
                 }
 
-                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasMonster));
+            }
+        }
+
+        public Trader CurrentTrader
+        {
+            get => _currentTrader;
+            set
+            {
+                _currentTrader = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasTrader));
             }
         }
 
@@ -264,7 +266,7 @@ namespace Engine.ViewModels
 
             // If the monster is killed, collect rewards etc
             if (CurrentMonster.IsDead)
-            { 
+            {
                 GetMonsterAtLocation();
             }
             else

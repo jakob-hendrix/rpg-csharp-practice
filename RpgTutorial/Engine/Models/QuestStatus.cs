@@ -11,7 +11,7 @@ namespace Engine.Models
         #region Properties
         private bool _isCompleted;
 
-        public Quest PlayerQuest { get; set; }
+        public Quest PlayerQuest { get; }
 
         public bool IsCompleted
         {
@@ -19,7 +19,7 @@ namespace Engine.Models
             set
             {
                 _isCompleted = value;
-                OnPropertyChanged(nameof(IsCompleted));
+                OnPropertyChanged();
             }
         } 
         #endregion

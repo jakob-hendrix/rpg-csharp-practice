@@ -8,32 +8,21 @@ namespace Engine.Models
 {
     public class World
     {
-        private List<Location> _locations = new List<Location>();
+        private readonly List<Location> _locations = new List<Location>();
 
-        internal void AddLocation(int xCoord, int yCoord, string name, string description, string imageSource)
+        internal void AddLocation(int xCoordinate, int yCoordinate, string name, string description, string imageSource)
         {
-            Location location = new Location()
-            {
-                XCoordinate = xCoord,
-                YCoordinate = yCoord,
-                Name = name,
-                Description = description,
-                ImageName = $"/Engine;component/Images/Locations/{imageSource}"
-            };
-
+            var location = new Location(xCoordinate,yCoordinate,name,description,imageSource);
             _locations.Add(location);
         }
 
         /// <summary>
         /// Returns an instance of Location that exists at the given coordinates.
         /// </summary>
-        /// <param name="xCoord"></param>
-        /// <param name="yCoord"></param>
+        /// <param name="xCoordinate"></param>
+        /// <param name="yCoordinate"></param>
         /// <returns></returns>
-        public Location LocationAt(int xCoord, int yCoord)
-        {
-            Location loc = _locations.FirstOrDefault(l => l.XCoordinate == xCoord && l.YCoordinate == yCoord);
-            return loc;
-        }
+        public Location LocationAt(int xCoordinate, int yCoordinate) 
+            => _locations.FirstOrDefault(l => l.XCoordinate == xCoordinate && l.YCoordinate == yCoordinate);
     }
 }

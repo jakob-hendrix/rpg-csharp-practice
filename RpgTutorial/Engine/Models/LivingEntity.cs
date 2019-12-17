@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Remoting;
 
 namespace Engine.Models
 {
     public abstract class LivingEntity : BaseNotificationClass
     {
         #region Properties
-
         private string _name;
         private int _currentHitPoints;
         private int _maximumHitPoints;
@@ -22,7 +20,7 @@ namespace Engine.Models
             private set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged();
             }
         }
 
@@ -32,7 +30,7 @@ namespace Engine.Models
             private set
             {
                 _currentHitPoints = value;
-                OnPropertyChanged(nameof(CurrentHitPoints));
+                OnPropertyChanged();
             }
         }
 
@@ -42,7 +40,7 @@ namespace Engine.Models
             protected set
             {
                 _maximumHitPoints = value;
-                OnPropertyChanged(nameof(MaximumHitPoints));
+                OnPropertyChanged();
             }
         }
 
@@ -52,7 +50,7 @@ namespace Engine.Models
             protected set
             {
                 _level = value;
-                OnPropertyChanged(nameof(Level));
+                OnPropertyChanged();
             }
         }
 
@@ -62,12 +60,12 @@ namespace Engine.Models
             protected set
             {
                 _gold = value;
-                OnPropertyChanged(nameof(Gold));
+                OnPropertyChanged();
             }
         }
 
-        public ObservableCollection<GameItem> Inventory { get; set; }
-        public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; set; }
+        public ObservableCollection<GameItem> Inventory { get; }
+        public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; }
         public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
         public bool IsDead => CurrentHitPoints <= 0;
 
