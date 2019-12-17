@@ -27,7 +27,7 @@ namespace Engine.Models
             YCoordinate = yCoordinate;
             Name = name;
             Description = description;
-            ImageName = imageName;
+            ImageName = $"/Engine;component/Images/Locations/{imageName}";
         }
 
         public void AddMonster(int monsterId, int chanceOfEncountering)
