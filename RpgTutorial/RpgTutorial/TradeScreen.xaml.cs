@@ -22,8 +22,8 @@ namespace RpgTutorial
 
             if (groupedInventoryItem != null)
             {
-                Session.CurrentPlayer.Gold += groupedInventoryItem.Item.Price;
-                //Session.CurrentPlayer.AddItemToInventory(groupedInventoryItem.Item);
+                Session.CurrentPlayer.ReceiveGold(groupedInventoryItem.Item.Price);
+                Session.CurrentPlayer.AddItemToInventory(groupedInventoryItem.Item);  // for debug
                 Session.CurrentPlayer.RemoveItemsFromInventory(groupedInventoryItem.Item);
             }
         }
@@ -36,8 +36,8 @@ namespace RpgTutorial
             {
                 if (Session.CurrentPlayer.Gold >= groupedInventoryItem.Item.Price)
                 {
-                    Session.CurrentPlayer.Gold -= groupedInventoryItem.Item.Price;
-                    //Session.CurrentPlayer.RemoveItemsFromInventory(groupedInventoryItem.Item);
+                    Session.CurrentPlayer.SpendGold(groupedInventoryItem.Item.Price);
+                    Session.CurrentPlayer.RemoveItemsFromInventory(groupedInventoryItem.Item);  // for debug
                     Session.CurrentPlayer.AddItemToInventory(groupedInventoryItem.Item);
                 }
                 else
