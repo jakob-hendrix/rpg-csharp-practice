@@ -8,17 +8,21 @@ namespace Engine.Models
 {
     public class GameItem
     {
+        #region Properties
         public int ItemTypeId { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
+        public bool IsUnique { get; set; } 
+        #endregion
 
-        public GameItem(int itemTypeID, string name, int price)
+        public GameItem(int itemTypeId, string name, int price, bool isUnique=false)
         {
-            ItemTypeId = itemTypeID;
+            ItemTypeId = itemTypeId;
             Name = name;
             Price = price;
+            IsUnique = isUnique;
         }
 
-        public GameItem Clone() => new GameItem(ItemTypeId, Name, Price);
+        public GameItem Clone() => new GameItem(ItemTypeId, Name, Price, IsUnique);
     }
 }

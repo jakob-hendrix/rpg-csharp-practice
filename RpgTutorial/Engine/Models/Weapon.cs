@@ -11,7 +11,7 @@
         //public int DamageDieSides { get; set; }
 
         public Weapon(int itemTypeId, string name, int price, int minDamage, int maxDamage)
-            : base(itemTypeId, name, price)
+            : base(itemTypeId, name, price, true)
         {
             MinDamage = minDamage;
             MaxDamage = maxDamage;
