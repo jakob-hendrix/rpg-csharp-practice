@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting;
 
 namespace Engine.Models
 {
@@ -16,7 +18,7 @@ namespace Engine.Models
         public string Name
         {
             get => _name;
-            set
+            private set
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
@@ -26,7 +28,7 @@ namespace Engine.Models
         public int CurrentHitPoints
         {
             get => _currentHitPoints;
-            set
+            private set
             {
                 _currentHitPoints = value;
                 OnPropertyChanged(nameof(CurrentHitPoints));
@@ -36,7 +38,7 @@ namespace Engine.Models
         public int MaximumHitPoints
         {
             get => _maximumHitPoints;
-            set
+            private set
             {
                 _maximumHitPoints = value;
                 OnPropertyChanged(nameof(MaximumHitPoints));
@@ -46,7 +48,7 @@ namespace Engine.Models
         public int Gold
         {
             get => _gold;
-            set
+            private set
             {
                 _gold = value;
                 OnPropertyChanged(nameof(Gold));
@@ -56,13 +58,58 @@ namespace Engine.Models
         public ObservableCollection<GameItem> Inventory { get; set; }
         public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; set; }
         public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
+        public bool IsDead => CurrentHitPoints <= 0;
 
         #endregion;
 
-        protected LivingEntity()
+        public event EventHandler OnKilled;
+
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold)
         {
+            _name = name;
+            _maximumHitPoints = maximumHitPoints;
+            _currentHitPoints = currentHitPoints;
+            _gold = gold;
+
             Inventory = new ObservableCollection<GameItem>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
+        }
+
+        public  void TakeDamage(int damageAmount)
+        {
+            CurrentHitPoints -= damageAmount;
+            if (IsDead)
+            {
+                CurrentHitPoints = 0;
+                RaiseOnKilledEvent();
+            }
+        }
+
+        public void Heal(int healedAmount)
+        {
+            CurrentHitPoints += healedAmount;
+
+            if (CurrentHitPoints > MaximumHitPoints)
+            {
+                CurrentHitPoints = MaximumHitPoints;
+            }
+        }
+
+        public void CompletelyHeal()
+        {
+            CurrentHitPoints = MaximumHitPoints;
+        }
+
+        public void ReceiveGold(int amount) => Gold += amount;
+
+        public void SpendGold(int amount)
+        {
+            if (amount > Gold)
+            {
+                throw new ArgumentOutOfRangeException($"{Name} only has {Gold} gold, and cannot spend {amount} gold");
+            }
+
+            Gold -= amount;
         }
 
         public void AddItemToInventory(GameItem item)
@@ -106,5 +153,6 @@ namespace Engine.Models
 
             OnPropertyChanged(nameof(Weapons));
         }
+        private void RaiseOnKilledEvent() => OnKilled?.Invoke(this, new System.EventArgs());
     }
 }

@@ -6,8 +6,11 @@ namespace Engine.Models
 {
     public class Player : LivingEntity
     {
+
+
         #region Properties
 
+        private string _characterClass;
         private string _class;
         private int _experiencePoints;
         private int _level;
@@ -42,12 +45,15 @@ namespace Engine.Models
             }
         }
 
-        public ObservableCollection<QuestStatus> Quests { get; set; } 
+        public ObservableCollection<QuestStatus> Quests { get; set; }
 
         #endregion
 
-        public Player()
+        public Player(string name, string characterClass, int experiencePoints, int maxHitPoints, int currentHitPoints,
+            int gold) : base(name, maxHitPoints, currentHitPoints, gold)
         {
+            _characterClass = characterClass;
+            _experiencePoints = experiencePoints;
             Quests = new ObservableCollection<QuestStatus>();
         }
 
@@ -60,6 +66,7 @@ namespace Engine.Models
                     return false;
                 }
             }
+
             return true;
         }
     }
