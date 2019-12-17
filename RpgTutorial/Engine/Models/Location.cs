@@ -8,15 +8,17 @@ namespace Engine.Models
     public class Location
     {
         #region Properties
+
         public int XCoordinate { get; }
         public int YCoordinate { get; }
-        public string Name { get;}
+        public string Name { get; }
         public string Description { get; }
         public string ImageName { get; }
-        public List<Quest> QuestsAvailableHere { get;} = new List<Quest>();
+        public List<Quest> QuestsAvailableHere { get; } = new List<Quest>();
 
         public List<MonsterEncounter> MonstersHere { get; } = new List<MonsterEncounter>();
-        public Trader TraderHere { get; set; } 
+        public Trader TraderHere { get; set; }
+
         #endregion
 
         public Location(int xCoordinate, int yCoordinate, string name, string description, string imageName)
@@ -30,7 +32,7 @@ namespace Engine.Models
 
         public void AddMonster(int monsterId, int chanceOfEncountering)
         {
-            if (MonstersHere.Exists(m  => m.MonsterId == monsterId))
+            if (MonstersHere.Exists(m => m.MonsterId == monsterId))
             {
                 // this monster has already been added to this location.
                 // override the chance to see them with a new value
