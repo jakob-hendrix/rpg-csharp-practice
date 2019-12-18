@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine.Actions;
+﻿using Engine.Actions;
 
 namespace Engine.Models
 {
@@ -22,11 +17,11 @@ namespace Engine.Models
         public string Name { get; }
         public int Price { get; }
         public bool IsUnique { get; }
-        public AttackWithWeapon Action { get; set; }
+        public IAction Action { get; set; }
 
         #endregion
 
-        public GameItem(ItemCategory category, int itemTypeId,string name, int price, bool isUnique = false, AttackWithWeapon action = null)
+        public GameItem(ItemCategory category, int itemTypeId, string name, int price, bool isUnique = false, IAction action = null)
         {
             Category = category;
             ItemTypeId = itemTypeId;
