@@ -26,6 +26,7 @@ namespace Engine.ViewModels
             {
                 if (_currentPlayer != null)
                 {
+                    _currentPlayer.OnActionPerformed -= OnCurrentPlayerPerformedAction;
                     _currentPlayer.OnLeveledUp -= OnCurrentPlayerLeveledUp;
                     _currentPlayer.OnKilled -= OnCurrentPlayerKilled;
                 }
@@ -34,6 +35,7 @@ namespace Engine.ViewModels
 
                 if (_currentPlayer != null)
                 {
+                    _currentPlayer.OnActionPerformed += OnCurrentPlayerPerformedAction;
                     _currentPlayer.OnLeveledUp += OnCurrentPlayerLeveledUp;
                     _currentPlayer.OnKilled += OnCurrentPlayerKilled;
                 }
@@ -99,8 +101,6 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasTrader));
             }
         }
-
-        public GameItem CurrentWeapon { get; set; }
 
         public bool HasLocationToNorth =>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
@@ -244,29 +244,17 @@ namespace Engine.ViewModels
 
         public void AttackCurrentMonster()
         {
-            if (CurrentWeapon == null)
+            if (CurrentPlayer.CurrentWeapon == null)
             {
                 RaiseMessage("You must select a weapon before attacking!");
                 return;
             }
 
-            // determine damage to monster
-            int damageToMonster =
-                RandomNumberGenerator.NumberBetween(CurrentWeapon.MinDamage, CurrentWeapon.MaxDamage);
+            CurrentPlayer.UseCurrentWeaponOn(CurrentMonster);
 
-            if (damageToMonster == 0)
-            {
-                RaiseMessage($"You missed the {CurrentMonster.Name}.");
-            }
-            else
-            {
-                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} damage.");
-                CurrentMonster.TakeDamage(damageToMonster);
-            }
-
-            // If the monster is killed, collect rewards etc
             if (CurrentMonster.IsDead)
             {
+                // Get another monster to fight
                 GetMonsterAtLocation();
             }
             else
@@ -315,10 +303,10 @@ namespace Engine.ViewModels
             }
         }
 
-        private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs e)
-        {
+        private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs e) =>
             RaiseMessage($"You gained a level! You are now level {CurrentPlayer.Level}.");
-        }
+
+        private void OnCurrentPlayerPerformedAction(object sender, string result) => RaiseMessage(result);
 
         private void RaiseMessage(string message) => OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
     }
