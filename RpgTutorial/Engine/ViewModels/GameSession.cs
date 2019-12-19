@@ -127,10 +127,15 @@ namespace Engine.ViewModels
 
             if (!CurrentPlayer.Weapons.Any())
             {
-                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1003));  // vorpal sword
-                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));  // a granola bar
+                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));  
+
             }
 
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1003));  // for quick battles
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));  // a granola bar
+            
+            CurrentPlayer.LearnRecipe(RecipeFactory.RecipeById(1));
+            
             CurrentWorld = WorldFactory.CreateWorld();
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
         }

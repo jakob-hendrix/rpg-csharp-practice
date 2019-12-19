@@ -34,6 +34,7 @@ namespace Engine.Models
         }
 
         public ObservableCollection<QuestStatus> Quests { get; }
+        public ObservableCollection<Recipe> Recipes { get; }
 
         #endregion
 
@@ -45,6 +46,7 @@ namespace Engine.Models
             Class = characterClass;
             ExperiencePoints = experiencePoints;
             Quests = new ObservableCollection<QuestStatus>();
+            Recipes = new ObservableCollection<Recipe>();
         }
 
         public void AddExperience(int gainedXp) => ExperiencePoints += gainedXp;
@@ -62,6 +64,14 @@ namespace Engine.Models
             }
         }
 
+        public void LearnRecipe(Recipe recipe)
+        {
+            if (!Recipes.Any(r => r.Id == recipe.Id))
+            {
+                Recipes.Add(recipe);
+            }
+        }
+
         public bool HasAllTheseItems(List<ItemQuantity> items)
         {
             foreach (ItemQuantity item in items)
@@ -71,6 +81,7 @@ namespace Engine.Models
                     return false;
                 }
             }
+
             return true;
         }
     }
