@@ -18,7 +18,7 @@ namespace Engine.Models
 
         public void AddIngredient(int itemId, int quantity)
         {
-            if (Equals(!Ingredients.Any(x => x.ItemId == itemId)))
+            if (!Ingredients.Any(x => x.ItemId == itemId))
             {
                 Ingredients.Add(new ItemQuantity(itemId, quantity));
             }

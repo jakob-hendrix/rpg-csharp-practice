@@ -147,8 +147,8 @@ namespace Engine.Models
         public void UseCurrentConsumable()
         {
             // currently, we can only use consumables on ourselves
-            CurrentConsumable.PerformAction(this,this);
-            RemoveItemsFromInventory(CurrentConsumable);
+            CurrentConsumable.PerformAction(this, this);
+            RemoveItemFromInventory(CurrentConsumable);
         }
 
         public void TakeDamage(int damageAmount)
@@ -211,7 +211,7 @@ namespace Engine.Models
             OnPropertyChanged(nameof(HasConsumable));
         }
 
-        public void RemoveItemsFromInventory(GameItem item)
+        public void RemoveItemFromInventory(GameItem item)
         {
             Inventory.Remove(item);
 
@@ -230,9 +230,34 @@ namespace Engine.Models
                     groupedInventoryItemToRemove.Quantity--;
                 }
             }
+
             OnPropertyChanged(nameof(Weapons));
             OnPropertyChanged(nameof(Consumables));
             OnPropertyChanged(nameof(HasConsumable));
+        }
+
+        public void RemoveItemsFromInventory(List<ItemQuantity> itemQuantities)
+        {
+            foreach (var itemQuantity in itemQuantities)
+            {
+                for (int i = 0; i < itemQuantity.Quantity; i++)
+                {
+                    RemoveItemFromInventory(Inventory.FirstOrDefault(item => item.ItemTypeId == itemQuantity.ItemId));
+                }
+            }
+        }
+
+        public bool HasAllTheseItems(List<ItemQuantity> items)
+        {
+            foreach (ItemQuantity item in items)
+            {
+                if (Inventory.Count(i => i.ItemTypeId == item.ItemId) < item.Quantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #region Private functions

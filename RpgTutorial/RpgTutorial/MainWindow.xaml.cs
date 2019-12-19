@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Documents;
 using Engine.EventArgs;
+using Engine.Models;
 using Engine.ViewModels;
 
 namespace RpgTutorial
@@ -51,5 +52,11 @@ namespace RpgTutorial
             tradeScreen.ShowDialog();
         }
         private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e) => _gameSession.UseCurrentConsumable();
+
+        private void OnClick_Craft(object sender, RoutedEventArgs e)
+        {  
+            Recipe recipe = ((FrameworkElement)sender).DataContext as Recipe;
+            _gameSession.CraftItemUsing(recipe);
+        }
     }
 }
