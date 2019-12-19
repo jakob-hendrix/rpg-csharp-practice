@@ -46,7 +46,7 @@ namespace Engine.Actions
             }
             else
             {
-                ReportResult($"{actorName} hit {targetName} for {damage} point{(damage > 1 ? "s" : "")}.");
+                ReportResult($"{actorName} hit {targetName} for {damage} point{(damage > 1 ? "s" : "")} of damage.");
                 target.TakeDamage(damage);
             }
         }

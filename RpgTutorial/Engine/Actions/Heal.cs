@@ -26,7 +26,7 @@ namespace Engine.Actions
             string targetName = (target is Player) ? "yourself" : $"the {target.Name.ToLower()}";
 
             ReportResults(
-                $"{actorName} heal {targetName} for {_hitPointsToHeal} pointP{(_hitPointsToHeal > 1 ? "s" : "")}");
+                $"{actorName} heal {targetName} for {_hitPointsToHeal} health point{(_hitPointsToHeal > 1 ? "s" : "")}");
             target.Heal(_hitPointsToHeal);
         }
 
