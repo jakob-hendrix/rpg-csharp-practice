@@ -15,6 +15,7 @@ namespace Engine.Factories
             // runs the first time this static class is used
             BuildWeapon(1001, "Pointy Stick", 1, 1, 2);
             BuildWeapon(1002, "Rusty Sword", 5, 1, 3);
+            BuildWeapon(1003,"Vorpal Sword",100000,5,500);
 
             BuildWeapon(1501,"Snake fangs",0,0,2);
             BuildWeapon(1502, "Rat claws", 0,0,2);

@@ -8,12 +8,14 @@ namespace Engine.Models
     public abstract class LivingEntity : BaseNotificationClass
     {
         #region Properties
+
         private string _name;
         private int _currentHitPoints;
         private int _maximumHitPoints;
         private int _gold;
         private int _level;
         private GameItem _currentWeapon;
+        private GameItem _currentConsumable;
 
         public string Name
         {
@@ -75,19 +77,49 @@ namespace Engine.Models
                 {
                     _currentWeapon.Action.OnActionPerformed -= RaiseActionPerformedEvent;
                 }
+
                 _currentWeapon = value;
 
                 if (_currentWeapon != null)
                 {
                     _currentWeapon.Action.OnActionPerformed += RaiseActionPerformedEvent;
                 }
+
+                OnPropertyChanged();
+            }
+        }
+
+        public GameItem CurrentConsumable
+        {
+            get => _currentConsumable;
+            set
+            {
+                if (_currentConsumable != null)
+                {
+                    _currentConsumable.Action.OnActionPerformed -= RaiseActionPerformedEvent;
+                }
+
+                _currentConsumable = value;
+
+                if (_currentConsumable != null)
+                {
+                    _currentConsumable.Action.OnActionPerformed += RaiseActionPerformedEvent;
+                }
+
                 OnPropertyChanged();
             }
         }
 
         public ObservableCollection<GameItem> Inventory { get; }
         public ObservableCollection<GroupedInventoryItem> GroupedInventory { get; }
-        public List<GameItem> Weapons => Inventory.Where(i => i.Category == GameItem.ItemCategory.Weapon).ToList();
+
+        public List<GameItem> Weapons =>
+            Inventory.Where(i => i.Category == GameItem.ItemCategory.Weapon).ToList();
+
+        public List<GameItem> Consumables =>
+            Inventory.Where(i => i.Category == GameItem.ItemCategory.Consumable).ToList();
+
+        public bool HasConsumable => Consumables.Any();
         public bool IsDead => CurrentHitPoints <= 0;
 
         #endregion;
@@ -110,6 +142,13 @@ namespace Engine.Models
         public void UseCurrentWeaponOn(LivingEntity target)
         {
             CurrentWeapon.PerformAction(this, target);
+        }
+
+        public void UseCurrentConsumable()
+        {
+            // currently, we can only use consumables on ourselves
+            CurrentConsumable.PerformAction(this,this);
+            RemoveItemsFromInventory(CurrentConsumable);
         }
 
         public void TakeDamage(int damageAmount)
@@ -168,6 +207,8 @@ namespace Engine.Models
             }
 
             OnPropertyChanged(nameof(Weapons));
+            OnPropertyChanged(nameof(Consumables));
+            OnPropertyChanged(nameof(HasConsumable));
         }
 
         public void RemoveItemsFromInventory(GameItem item)
@@ -189,15 +230,19 @@ namespace Engine.Models
                     groupedInventoryItemToRemove.Quantity--;
                 }
             }
-
             OnPropertyChanged(nameof(Weapons));
+            OnPropertyChanged(nameof(Consumables));
+            OnPropertyChanged(nameof(HasConsumable));
         }
 
         #region Private functions
-        private void RaiseOnKilledEvent() => 
+
+        private void RaiseOnKilledEvent() =>
             OnKilled?.Invoke(this, new System.EventArgs());
+
         private void RaiseActionPerformedEvent(object sender, string result) =>
-            OnActionPerformed?.Invoke(this, result); 
+            OnActionPerformed?.Invoke(this, result);
+
         #endregion
     }
 }

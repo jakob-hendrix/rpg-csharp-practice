@@ -21,27 +21,13 @@ namespace RpgTutorial
             DataContext = _gameSession;
         }
 
+        private void OnClick_MoveNorth(object sender, RoutedEventArgs e) => _gameSession.MoveNorth();
 
+        private void OnClick_MoveWest(object sender, RoutedEventArgs e) => _gameSession.MoveWest();
 
-        private void OnClick_MoveNorth(object sender, RoutedEventArgs e)
-        {
-            _gameSession.MoveNorth();
-        }
+        private void OnClick_MoveEast(object sender, RoutedEventArgs e) => _gameSession.MoveEast();
 
-        private void OnClick_MoveWest(object sender, RoutedEventArgs e)
-        {
-            _gameSession.MoveWest();
-        }
-
-        private void OnClick_MoveEast(object sender, RoutedEventArgs e)
-        {
-            _gameSession.MoveEast();
-        }
-
-        private void OnClick_MoveSouth(object sender, RoutedEventArgs e)
-        {
-            _gameSession.MoveSouth();
-        }
+        private void OnClick_MoveSouth(object sender, RoutedEventArgs e) => _gameSession.MoveSouth();
 
         private void OnGameMessageRaised(object sender, GameMessageEventArgs e)
         {
@@ -53,10 +39,7 @@ namespace RpgTutorial
             GameMessages.ScrollToEnd();
         }
 
-        private void OnClick_AttackMonster(object sender, RoutedEventArgs e)
-        {
-            _gameSession.AttackCurrentMonster();
-        }
+        private void OnClick_AttackMonster(object sender, RoutedEventArgs e) => _gameSession.AttackCurrentMonster();
 
         private void OnClick_DisplayTradeScreen(object sender, RoutedEventArgs e)
         {
@@ -67,5 +50,6 @@ namespace RpgTutorial
             };
             tradeScreen.ShowDialog();
         }
+        private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e) => _gameSession.UseCurrentConsumable();
     }
 }

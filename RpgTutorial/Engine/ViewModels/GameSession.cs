@@ -127,7 +127,8 @@ namespace Engine.ViewModels
 
             if (!CurrentPlayer.Weapons.Any())
             {
-                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
+                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1003));  // vorpal sword
+                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));  // a granola bar
             }
 
             CurrentWorld = WorldFactory.CreateWorld();
@@ -265,6 +266,8 @@ namespace Engine.ViewModels
                 CurrentMonster.UseCurrentWeaponOn(CurrentPlayer);
             }
         }
+
+        public void UseCurrentConsumable() => CurrentPlayer.UseCurrentConsumable();
 
         private void OnCurrentPlayerKilled(object sender, System.EventArgs e)
         {
