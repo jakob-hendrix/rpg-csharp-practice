@@ -74,6 +74,7 @@ namespace Engine.ViewModels
                 if (_currentMonster != null)
                 {
                     _currentMonster.OnKilled -= OnCurrentMonsterKilled;
+                    _currentMonster.OnActionPerformed -= OnCurrentMonsterPerformedAction;
                 }
 
                 _currentMonster = value;
@@ -81,6 +82,7 @@ namespace Engine.ViewModels
                 if (CurrentMonster != null)
                 {
                     _currentMonster.OnKilled += OnCurrentMonsterKilled;
+                    _currentMonster.OnActionPerformed += OnCurrentMonsterPerformedAction;
 
                     RaiseMessage("");
                     RaiseMessage($"You see a {CurrentMonster.Name} here!");
@@ -260,19 +262,7 @@ namespace Engine.ViewModels
             else
             {
                 // If the monster still lives, it attacks!
-
-                int damageToPlayer =
-                    RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
-
-                if (damageToPlayer == 0)
-                {
-                    RaiseMessage($"{CurrentMonster.Name} attacks, but misses.");
-                }
-                else
-                {
-                    RaiseMessage($"{CurrentMonster.Name} hits you for {damageToPlayer} damage!");
-                    CurrentPlayer.TakeDamage(damageToPlayer);
-                }
+                CurrentMonster.UseCurrentWeaponOn(CurrentPlayer);
             }
         }
 
@@ -307,6 +297,7 @@ namespace Engine.ViewModels
             RaiseMessage($"You gained a level! You are now level {CurrentPlayer.Level}.");
 
         private void OnCurrentPlayerPerformedAction(object sender, string result) => RaiseMessage(result);
+        private void OnCurrentMonsterPerformedAction(object sender, string result) => RaiseMessage(result);
 
         private void RaiseMessage(string message) => OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
     }
