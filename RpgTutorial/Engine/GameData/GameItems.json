@@ -1,0 +1,26 @@
+{
+  "GameItems": {
+    "Weapons": [
+      { "Id": 1001, "Name": "Pointy Stick", "Price": 1, "MinimumDamage": 1, "MaximumDamage": 2 },
+      { "Id": 1002, "Name": "Rusty Sword", "Price": 5, "MinimumDamage": 1, "MaximumDamage": 3 },
+      { "Id": 1003, "Name": "Vorpal Sword", "Price": 500, "MinimumDamage": 5, "MaximumDamage": 100 },
+      { "Id": 1501, "Name": "Snake Fang", "Price": 0, "MinimumDamage": 0, "MaximumDamage": 2 },
+      { "Id": 1502, "Name": "Rat Claw", "Price": 0, "MinimumDamage": 0, "MaximumDamage": 2 },
+      { "Id": 1503, "Name": "Spider Fang", "Price": 0, "MinimumDamage": 0, "MaximumDamage": 4 }
+    ],
+    "HealingItems": [
+      { "Id": 2001, "Name": "Granola Bar", "Price": 5, "HitPointsToHeal": 2}
+    ],
+    "MiscellaneousItems": [
+      { "Id": 3001, "Name": "Oats", "Price": 1 },
+      { "Id": 3002, "Name": "Honey", "Price": 2},
+      { "Id": 3003, "Name": "Bunch of Raisins", "Price": 2 },
+      { "Id": 9001, "Name": "Snake Fang", "Price": 1},
+      { "Id": 9002, "Name": "Snake Skin", "Price": 2},
+      { "Id": 9003, "Name": "Rat Tail", "Price": 1},
+      { "Id": 9004, "Name": "Rat Fur", "Price": 2},
+      { "Id": 9005, "Name": "Spider Fang", "Price": 2},
+      { "Id": 9006, "Name": "Spider Silk", "Price": 3}
+    ]
+  }
+}

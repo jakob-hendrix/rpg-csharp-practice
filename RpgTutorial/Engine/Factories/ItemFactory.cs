@@ -1,38 +1,31 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Engine.Actions;
+﻿using Engine.Actions;
 using Engine.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Engine.Factories
 {
     public static class ItemFactory
     {
+        private const string GAME_DATA_FILENAME = @".\GameData\GameItems.json";
+
         private static readonly List<GameItem> _standardGameItems = new List<GameItem>();
 
-        // Populate our list of game items
+        // Populate our list of game items. Runs the first time this static class is used
         static ItemFactory()
         {
-            // runs the first time this static class is used
-            BuildWeapon(1001, "Pointy Stick", 1, 1, 2);
-            BuildWeapon(1002, "Rusty Sword", 5, 1, 3);
-            BuildWeapon(1003,"Vorpal Sword",100000,5,500);
+            if (File.Exists(GAME_DATA_FILENAME))
+            {
+                using (var reader = new StreamReader(GAME_DATA_FILENAME))
+                {
 
-            BuildWeapon(1501,"Snake fangs",0,0,2);
-            BuildWeapon(1502, "Rat claws", 0,0,2);
-            BuildWeapon(1503,"Spider fangs",0,0,4);
-
-            BuildHealingItem(2001, "Granola bar", 5, 2);
-
-            BuildMiscellaneousItem(3001,"Oats",1);
-            BuildMiscellaneousItem(3002, "Honey", 2);
-            BuildMiscellaneousItem(3003, "Raisins", 2);
-
-            BuildMiscellaneousItem(9001, "Snake Fang", 1);
-            BuildMiscellaneousItem(9002, "Snakeskin", 2);
-            BuildMiscellaneousItem(9003, "Rat Tail", 1);
-            BuildMiscellaneousItem(9004, "Rat Fur", 2);
-            BuildMiscellaneousItem(9005, "Spider Fang", 1);
-            BuildMiscellaneousItem(9006, "Spider Silk", 3);
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException($"Missing data file: {GAME_DATA_FILENAME}");
+            }
         }
 
         private static void BuildHealingItem(int id, string name, int price, int hitPointsToHeal)
