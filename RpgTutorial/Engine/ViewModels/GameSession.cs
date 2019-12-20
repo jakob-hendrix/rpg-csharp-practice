@@ -248,6 +248,12 @@ namespace Engine.ViewModels
 
         public void AttackCurrentMonster()
         {
+            if (CurrentMonster == null)
+            {
+                RaiseMessage("You swing wildly at nothing");
+                return;
+            }
+            
             if (CurrentPlayer.CurrentWeapon == null)
             {
                 RaiseMessage("You must select a weapon before attacking!");
@@ -267,7 +273,15 @@ namespace Engine.ViewModels
                 CurrentMonster.UseCurrentWeaponOn(CurrentPlayer);
             }
         }
-        public void UseCurrentConsumable() => CurrentPlayer.UseCurrentConsumable();
+        public void UseCurrentConsumable()
+        {
+            if (CurrentPlayer.CurrentConsumable == null)
+            {
+                RaiseMessage($"You have nothing to consume");
+                return;
+            }
+            CurrentPlayer.UseCurrentConsumable();
+        }
 
         public void CraftItemUsing(Recipe recipe)
         {
