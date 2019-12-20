@@ -49,12 +49,15 @@ namespace RpgTutorial
 
         private void OnClick_DisplayTradeScreen(object sender, RoutedEventArgs e)
         {
-            TradeScreen tradeScreen = new TradeScreen
+            if (_gameSession.CurrentTrader != null)
             {
-                Owner = this, 
-                DataContext = _gameSession
-            };
-            tradeScreen.ShowDialog();
+                TradeScreen tradeScreen = new TradeScreen
+                {
+                    Owner = this,
+                    DataContext = _gameSession
+                };
+                tradeScreen.ShowDialog(); 
+            }
         }
         private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e) => _gameSession.UseCurrentConsumable();
 
@@ -75,6 +78,7 @@ namespace RpgTutorial
             // player actions
             _userInputActions.Add(Key.Z, () => _gameSession.AttackCurrentMonster());
             _userInputActions.Add(Key.C, () => _gameSession.UseCurrentConsumable());
+            _userInputActions.Add(Key.T, () => OnClick_DisplayTradeScreen(this, new RoutedEventArgs()));
 
             // player data tabs
             _userInputActions.Add(Key.I, () => SetTabFocusTo("InventoryTabItem"));
